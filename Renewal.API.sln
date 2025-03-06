@@ -5,6 +5,8 @@ VisualStudioVersion = 17.12.35527.113 d17.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Renewal.API", "Renewal.API\Renewal.API.csproj", "{8BF75238-EE0A-4271-B2BF-91D5E82EC525}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Renewal.DataHub", "Renewal.DataHub\Renewal.DataHub.csproj", "{0BFCDFBC-CB36-4469-8A1F-C3550E407B8A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{8BF75238-EE0A-4271-B2BF-91D5E82EC525}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8BF75238-EE0A-4271-B2BF-91D5E82EC525}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8BF75238-EE0A-4271-B2BF-91D5E82EC525}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BFCDFBC-CB36-4469-8A1F-C3550E407B8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BFCDFBC-CB36-4469-8A1F-C3550E407B8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BFCDFBC-CB36-4469-8A1F-C3550E407B8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BFCDFBC-CB36-4469-8A1F-C3550E407B8A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
