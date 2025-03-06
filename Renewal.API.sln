@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Renewal.API", "Renewal.API\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Renewal.DataHub", "Renewal.DataHub\Renewal.DataHub.csproj", "{0BFCDFBC-CB36-4469-8A1F-C3550E407B8A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Renewal.Service", "Renewal.Service\Renewal.Service.csproj", "{7E86A0DE-47F3-4047-8A91-8B71DBB66EAB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{0BFCDFBC-CB36-4469-8A1F-C3550E407B8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0BFCDFBC-CB36-4469-8A1F-C3550E407B8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0BFCDFBC-CB36-4469-8A1F-C3550E407B8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E86A0DE-47F3-4047-8A91-8B71DBB66EAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E86A0DE-47F3-4047-8A91-8B71DBB66EAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E86A0DE-47F3-4047-8A91-8B71DBB66EAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E86A0DE-47F3-4047-8A91-8B71DBB66EAB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
