@@ -11,6 +11,8 @@ public class ApplicationDbContext: DbContext
     
     public DbSet<PODetail> PODetails { get; set; }
     public DbSet<Category> Categories { get; set; }
+    public DbSet<Branch> Branches { get; set; }
+    public DbSet<PettyCashTransaction> PettyCashTransaction { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -35,5 +37,16 @@ public class ApplicationDbContext: DbContext
             entity.Property(e => e.UpdatedDate)
                 .HasColumnType("date");
         });
+        modelBuilder.Entity<Branch>()
+                .HasKey(b => b.BranchID);
+
+        modelBuilder.Entity<PettyCashTransaction>()
+            .HasKey(p => p.TransactionID);
+
+        modelBuilder.Entity<PettyCashTransaction>()
+            .HasOne(p => p.Branch)
+            .WithMany(b => b.PettyCashTransaction)
+            .HasForeignKey(p => p.BranchID)
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }

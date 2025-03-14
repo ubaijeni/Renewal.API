@@ -1,5 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Renewal.DataHub.Data;
+using Renewal.DataHub.Models.Repository;
+using Renewal.Services.BusinessLogic;
+using Renewal.Services.Interfaces;
+using Renewal.Services.Mappings;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +12,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
+builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
@@ -21,6 +26,12 @@ builder.Services.AddScoped<Renewal.DataHub.Repositories.IPODetailsRepository, Re
 // Register services
 builder.Services.AddScoped<Renewal.Service.Interfaces.ICategoryService, Renewal.Service.BusinessLogic.CategoryService>();
 builder.Services.AddScoped<Renewal.Service.Interfaces.IPODetailsService, Renewal.Service.BusinessLogic.PODetailsService>();
+
+builder.Services.AddTransient<IBranchData, BranchData>();
+builder.Services.AddTransient<IPettyCashTransactionData, PettyCashTransactionData>();
+builder.Services.AddTransient<IBranchService, BranchService>();
+builder.Services.AddTransient<IPettyCashTransactionService, PettyCashTransactionService>();
+
 
 var app = builder.Build();
 // Configure the HTTP request pipeline.
