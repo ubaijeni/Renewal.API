@@ -7,14 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="BusinessLogic\" />
-    <Folder Include="DTO\" />
-    <Folder Include="Interfaces\" />
-    <Folder Include="Mappings\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="14.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.3" />
   </ItemGroup>
 
   <ItemGroup>
