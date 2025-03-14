@@ -1,12 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Renewal.DataHub.Data;
 using Renewal.DataHub.Models.Domain;
 
 namespace Renewal.DataHub.Models.Repository
 {
     public class BranchData:IBranchData
     {
-        private readonly PettyCashDbContext _context;
-        public BranchData(PettyCashDbContext context)
+        private readonly ApplicationDbContext _context;
+        public BranchData(ApplicationDbContext context)
         {
             _context = context;
         }
