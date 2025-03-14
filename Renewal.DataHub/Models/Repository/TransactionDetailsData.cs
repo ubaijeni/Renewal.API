@@ -1,13 +1,14 @@
-﻿using Renewal.DataHub.Models.Domain;
+﻿using Renewal.DataHub.Data;
+using Renewal.DataHub.Models.Domain;
 using System;
 
 namespace Renewal.DataHub.Models.Repository
 {
     public class TransactionDetailsData : ITransactionDetailsData
     {
-        private readonly SampleDbContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public TransactionDetailsData(SampleDbContext context)
+        public TransactionDetailsData(ApplicationDbContext context)
         {
             _context = context;
         }

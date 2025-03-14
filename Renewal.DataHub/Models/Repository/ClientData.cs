@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Renewal.DataHub.Data;
 using Renewal.DataHub.Models.Domain;
 using System;
 using System.Collections.Generic;
@@ -9,9 +10,9 @@ namespace Renewal.DataHub.Models.Repository
 {
     public class ClientData : IClientData
     {
-        private readonly SampleDbContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public ClientData(SampleDbContext context)
+        public ClientData(ApplicationDbContext context)
         {
             _context = context;
         }
