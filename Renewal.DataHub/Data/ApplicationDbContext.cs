@@ -13,6 +13,9 @@ public class ApplicationDbContext: DbContext
     public DbSet<Category> Categories { get; set; }
     public DbSet<Branch> Branches { get; set; }
     public DbSet<PettyCashTransaction> PettyCashTransaction { get; set; }
+    public DbSet<Client> Clients { get; set; }
+    public DbSet<RenewalValue> Renewalset { get; set; }
+    public DbSet<TransactionDetails> Trans { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
