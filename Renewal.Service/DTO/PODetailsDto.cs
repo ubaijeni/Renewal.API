@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using Renewal.DataHub.Models.Domain;
 
 namespace Renewal.Service.DTO
 {
@@ -38,12 +39,14 @@ namespace Renewal.Service.DTO
     // DTO for returning PO Details data
     public class PODetailsDto
     {
-        public int POId { get; set; }
-        public int? POTypeId { get; set; }
+        public Guid POId { get; set; }
+
+        public POType? Type { get; set; } // Change from POTypeId to Enum
+
         public string? PONumber { get; set; }
         public decimal? POValue { get; set; }
         public int? POStatusId { get; set; }
-        public int? ClientNameId { get; set; }
+        public Guid? ClientNameId { get; set; }
         public int? EngagementModelId { get; set; }
         public string? ResourceProjectName { get; set; }
         public int? LocationId { get; set; }
@@ -66,6 +69,8 @@ namespace Renewal.Service.DTO
         public string? DMPOC { get; set; }
         public string? FMPOC { get; set; }
         public string? ProposalPath { get; set; }
+        public string? ClientName { get; set; }
+        public ClientDTO Client { get; set; }
     }
 
     // DTO for creating a new PO Detail
@@ -78,19 +83,18 @@ namespace Renewal.Service.DTO
         [Required(ErrorMessage = "CreatedBy is required")]
         public int CreatedBy { get; set; }
 
-        [Required(ErrorMessage = "Start Date is required")]
         [DataType(DataType.Date)]
-        public DateTime StartDate { get; set; }
+        public DateTime? StartDate { get; set; }
 
-        [Required(ErrorMessage = "End Date is required")]
         [DataType(DataType.Date)]
         [DateGreaterThan(nameof(StartDate), ErrorMessage = "End Date must be after Start Date")]
-        public DateTime EndDate { get; set; }
+        public DateTime? EndDate { get; set; }
 
-        public int? POTypeId { get; set; }
+        public POType? Type { get; set; } // Change from POTypeId to Enum
+
         public decimal? POValue { get; set; }
         public int? POStatusId { get; set; }
-        public int? ClientNameId { get; set; }
+        public Guid? ClientNameId { get; set; }
         public int? EngagementModelId { get; set; }
         public string? ResourceProjectName { get; set; }
         public int? LocationId { get; set; }
@@ -105,6 +109,9 @@ namespace Renewal.Service.DTO
         public string? DMPOC { get; set; }
         public string? FMPOC { get; set; }
         public string? ProposalPath { get; set; }
+        public string? ClientName { get; set; }
+        public Client Client { get; set; }
+
     }
 
     // DTO for updating an existing PO Detail
@@ -117,19 +124,18 @@ namespace Renewal.Service.DTO
         [Required(ErrorMessage = "UpdatedBy is required")]
         public int UpdatedBy { get; set; }
 
-        [Required(ErrorMessage = "Start Date is required")]
         [DataType(DataType.Date)]
         public DateTime StartDate { get; set; }
 
-        [Required(ErrorMessage = "End Date is required")]
         [DataType(DataType.Date)]
         [DateGreaterThan(nameof(StartDate), ErrorMessage = "End Date must be after Start Date")]
         public DateTime EndDate { get; set; }
 
-        public int? POTypeId { get; set; }
+        public POType? Type { get; set; } // Change from POTypeId to Enum
+
         public decimal? POValue { get; set; }
         public int? POStatusId { get; set; }
-        public int? ClientNameId { get; set; }
+        public Guid? ClientNameId { get; set; }
         public int? EngagementModelId { get; set; }
         public string? ResourceProjectName { get; set; }
         public int? LocationId { get; set; }
@@ -141,15 +147,18 @@ namespace Renewal.Service.DTO
         public string? ReminderToAlert { get; set; }
         public string? Remarks { get; set; }
         public string? POFileName { get; set; }
-        
+
         [Range(0, 1, ErrorMessage = "IsActive must be either 0 or 1")]
         public int? IsActive { get; set; }
-        
+
         [Range(0, 1, ErrorMessage = "Suspend must be either 0 or 1")]
         public int? Suspend { get; set; }
-        
+
         public string? DMPOC { get; set; }
         public string? FMPOC { get; set; }
         public string? ProposalPath { get; set; }
+        public string? ClientName { get; set; }
+        public Client Client { get; set; }
+
     }
 }

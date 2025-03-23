@@ -23,7 +23,7 @@ namespace Renewal.DataHub.Models.Repository
 
         public async Task<RenewalValue> GetByIdAsync(Guid id)
         {
-            return await _context.Renewalset.FirstOrDefaultAsync(t => t.RENEWALID == id);
+            return await _context.Renewalset.FirstOrDefaultAsync(t => t.RenewalId == id);
         }
 
         public async Task<RenewalValue> CreateAsync(RenewalValue renewal)

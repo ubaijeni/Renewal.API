@@ -1,34 +1,32 @@
+﻿using System;
 using Renewal.DataHub.Models.Domain;
 using Renewal.Service.DTO;
-using System;
 
 namespace Renewal.Service.Mappings
 {
     public static class PODetailsMapper
     {
+        // ✅ Convert Entity to DTO
         public static PODetailsDto ToDto(PODetail poDetail)
         {
             if (poDetail == null)
                 return null;
-                
+
             return new PODetailsDto
             {
                 POId = poDetail.POId,
-                POTypeId = poDetail.POTypeId,
+                Type = poDetail.POTypeId.HasValue ? (POType)poDetail.POTypeId.Value : (POType?)null, // ✅ Convert POTypeId to Enum
                 PONumber = poDetail.PONumber,
                 POValue = poDetail.POValue,
                 POStatusId = poDetail.POStatusId,
                 ClientNameId = poDetail.ClientNameId,
+                ClientName = poDetail.Client?.ClientName, // ✅ Safe null handling
                 EngagementModelId = poDetail.EngagementModelId,
                 ResourceProjectName = poDetail.ResourceProjectName,
                 LocationId = poDetail.LocationId,
                 Accountable = poDetail.Accountable,
                 CurrencyId = poDetail.CurrencyId,
-                JoiningDate = poDetail.JoiningDate != null ? DateTime.Parse(poDetail.JoiningDate) : null,
-                StartDate = DateTime.Parse(poDetail.StartDate),
-                EndDate = DateTime.Parse(poDetail.EndDate),
                 ContractPeriod = poDetail.ContractPeriod,
-                RenewalDate = poDetail.RenewalDate != null ? DateTime.Parse(poDetail.RenewalDate) : null,
                 ReminderToAlert = poDetail.ReminderToAlert,
                 Remarks = poDetail.Remarks,
                 POFileName = poDetail.POFileName,
@@ -44,13 +42,17 @@ namespace Renewal.Service.Mappings
             };
         }
 
+        // ✅ Convert Create DTO to Entity
         public static PODetail ToEntity(CreatePODetailsDto dto)
         {
+            if (dto == null)
+                return null;
+
             return new PODetail
             {
+                POId = Guid.NewGuid(), // ✅ Ensure a new Guid is assigned
+                POTypeId = dto.Type.HasValue ? (int)dto.Type.Value : (int?)null, // ✅ Convert Enum to int
                 PONumber = dto.PONumber,
-                CreatedBy = dto.CreatedBy,
-                POTypeId = dto.POTypeId,
                 POValue = dto.POValue,
                 POStatusId = dto.POStatusId,
                 ClientNameId = dto.ClientNameId,
@@ -59,25 +61,29 @@ namespace Renewal.Service.Mappings
                 LocationId = dto.LocationId,
                 Accountable = dto.Accountable,
                 CurrencyId = dto.CurrencyId,
-                JoiningDate = dto.JoiningDate?.ToString("yyyy-MM-dd"),
-                StartDate = dto.StartDate.ToString("yyyy-MM-dd"),
-                EndDate = dto.EndDate.ToString("yyyy-MM-dd"),
                 ContractPeriod = dto.ContractPeriod,
-                RenewalDate = dto.RenewalDate?.ToString("yyyy-MM-dd"),
                 ReminderToAlert = dto.ReminderToAlert,
                 Remarks = dto.Remarks,
                 POFileName = dto.POFileName,
                 DMPOC = dto.DMPOC,
                 FMPOC = dto.FMPOC,
-                ProposalPath = dto.ProposalPath
+                ProposalPath = dto.ProposalPath,
+                IsActive = 1, // ✅ Assuming new POs are active by default
+                CreatedDateTime = DateTime.UtcNow,
+                CreatedBy = dto.CreatedBy,
+                UpdatedDateTime = DateTime.UtcNow,
+                UpdatedBy = dto.CreatedBy
             };
         }
 
+        // ✅ Update existing Entity from DTO
         public static void UpdateEntityFromDto(PODetail entity, UpdatePODetailsDto dto)
         {
+            if (entity == null || dto == null)
+                return;
+
+entity.POTypeId = dto.Type.HasValue ? (int)dto.Type.Value : (int?)null; // ✅ Corrected
             entity.PONumber = dto.PONumber;
-            entity.UpdatedBy = dto.UpdatedBy;
-            entity.POTypeId = dto.POTypeId;
             entity.POValue = dto.POValue;
             entity.POStatusId = dto.POStatusId;
             entity.ClientNameId = dto.ClientNameId;
@@ -86,11 +92,7 @@ namespace Renewal.Service.Mappings
             entity.LocationId = dto.LocationId;
             entity.Accountable = dto.Accountable;
             entity.CurrencyId = dto.CurrencyId;
-            entity.JoiningDate = dto.JoiningDate?.ToString("yyyy-MM-dd");
-            entity.StartDate = dto.StartDate.ToString("yyyy-MM-dd");
-            entity.EndDate = dto.EndDate.ToString("yyyy-MM-dd");
             entity.ContractPeriod = dto.ContractPeriod;
-            entity.RenewalDate = dto.RenewalDate?.ToString("yyyy-MM-dd");
             entity.ReminderToAlert = dto.ReminderToAlert;
             entity.Remarks = dto.Remarks;
             entity.POFileName = dto.POFileName;
@@ -99,6 +101,8 @@ namespace Renewal.Service.Mappings
             entity.DMPOC = dto.DMPOC;
             entity.FMPOC = dto.FMPOC;
             entity.ProposalPath = dto.ProposalPath;
+            entity.UpdatedBy = dto.UpdatedBy;
+            entity.UpdatedDateTime = DateTime.UtcNow; // ✅ Ensure update timestamp is set
         }
     }
 }

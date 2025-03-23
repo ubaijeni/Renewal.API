@@ -1,4 +1,4 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Renewal.DataHub.Models.Domain;
 
 namespace Renewal.DataHub.Data;
@@ -16,6 +16,7 @@ public class ApplicationDbContext: DbContext
     public DbSet<Client> Clients { get; set; }
     public DbSet<RenewalValue> Renewalset { get; set; }
     public DbSet<TransactionDetails> Trans { get; set; }
+    public DbSet<AmountReceive> AmountReceived { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

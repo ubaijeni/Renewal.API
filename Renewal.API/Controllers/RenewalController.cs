@@ -37,7 +37,7 @@ namespace Renewal.API.Controllers
         public async Task<IActionResult> Create([FromBody] AddRenewalValueDTO request)
         {
             var response = await _renewalService.CreateAsync(request);
-            return CreatedAtAction(nameof(GetById), new { id = response.RENEWALID }, response);
+            return CreatedAtAction(nameof(GetById), new { id = response.RenewalId }, response);
         }
 
         [HttpPut("{id:Guid}")]

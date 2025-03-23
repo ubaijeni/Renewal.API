@@ -3,24 +3,24 @@
     public class TransactionDTO
     {
         public Guid TransactionId { get; set; }
-        public Guid? TRENEWALID { get; set; }
-        public Guid? BRANCHID { get; set; }
-        public Guid? CATEGORYID { get; set; }
-        public string DESCRIPTION { get; set; }
-        public string STARTDATE { get; set; }
-        public string ENDDATE { get; set; }
-        public string VALIDITY { get; set; }
-        public string RENEWALDATE { get; set; }
-        public decimal? AMOUNT { get; set; }
-        public int? REMINDER { get; set; }
-        public string ALERTTO { get; set; }
-        public int? STATUS { get; set; }
-        public bool? ACTIVE { get; set; }
-        public int? CREATEDBY { get; set; }
-        public DateTime? CREATEDDATE { get; set; }
-        public int? UPDATEDBY { get; set; }
-        public DateTime? UPDATEDDATE { get; set; }
-        public bool? SUSPEND { get; set; }
+        public Guid? TrenewalId { get; set; }
+        public Guid? BranchId { get; set; }
+        public Guid? CategoryId { get; set; }
+        public string Description { get; set; }
+        public string StartDate { get; set; }
+        public string EndDate { get; set; }
+        public string? Validity { get; set; }
+        public string? RenewalDate { get; set; }
+        public decimal? Amount { get; set; }
+        public int? Reminder { get; set; }
+        public string? AlterTo { get; set; }
+        public int? Status { get; set; }
+        public bool? Active { get; set; }
+        public int? CreatedBy { get; set; }
+        public DateTime? CreatedDate { get; set; }
+        public int? UpdatedBy { get; set; }
+        public DateTime? UpdatedDate { get; set; }
+        public bool? Suspend { get; set; }
 
     }
 }

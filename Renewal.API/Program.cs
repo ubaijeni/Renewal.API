@@ -40,9 +40,11 @@ builder.Services.AddScoped<Renewal.Service.Interfaces.IPODetailsService, Renewal
 builder.Services.AddTransient<IBranchData, BranchData>();
 builder.Services.AddTransient<IPettyCashTransactionData, PettyCashTransactionData>();
 builder.Services.AddTransient<IBranchService, BranchService>();
+builder.Services.AddTransient<IAmountService, AmountService>();
 builder.Services.AddTransient<IPettyCashTransactionService, PettyCashTransactionService>();
 builder.Services.AddTransient<IClientData, ClientData>();
 builder.Services.AddTransient<IRenewalData, RenewalData>();
+builder.Services.AddTransient<IAmountData, AmountData>();
 builder.Services.AddTransient<ITransactionDetailsData, TransactionDetailsData>();
 builder.Services.AddTransient<IClientService, ClientService>();
 builder.Services.AddTransient<IRenewalValueService, RenewalValueService>();
