@@ -16,7 +16,6 @@ namespace Renewal.Service.Mappings
             CreateMap<AddRenewalValueDTO, RenewalValue>().ReverseMap();
             CreateMap<AddAmountReceiveDTO, AmountReceive>().ReverseMap();
 
-            // ✅ Fix for BalanceAmount calculation
             CreateMap<AmountReceive, AmountReceiveDTO>()
                 .ForMember(dest => dest.BalanceAmount, opt => opt.MapFrom((src, dest, destMember, context) =>
                 {
@@ -27,7 +26,6 @@ namespace Renewal.Service.Mappings
                     return poValue - totalReceived - src.Amountreceived;
                 }));
 
-            // ✅ Add this mapping to fix potential errors
             CreateMap<RenewalValue, TransactionDetails>().ReverseMap();
         }
     }
