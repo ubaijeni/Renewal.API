@@ -24,7 +24,7 @@ namespace Renewal.DataHub.Models.Repository
 
         public async Task<Client> GetByIdAsync(Guid id)
         {
-            return await _context.Clients.FirstOrDefaultAsync(t => t.CLIENTID == id);
+            return await _context.Clients.FirstOrDefaultAsync(t => t.ClientId == id);
         }
 
         public async Task<Client> CreateAsync(Client client)
@@ -36,8 +36,8 @@ namespace Renewal.DataHub.Models.Repository
 
         public async Task<Guid?> GetClientIdByNameAsync(string name)
         {
-            var client = await _context.Clients.FirstOrDefaultAsync(x => x.CLIENTNAME == name);
-            return client?.CLIENTID;
+            var client = await _context.Clients.FirstOrDefaultAsync(x => x.ClientName == name);
+            return client?.ClientId;
         }
 
         public async Task<Client> UpdateAsync(Client client)

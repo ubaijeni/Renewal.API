@@ -1,97 +1,113 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Renewal.DataHub.Models.Domain;
-
-[Table("PODetails")]
-public class PODetail
+namespace Renewal.DataHub.Models.Domain
 {
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    [Column("POID")]
-    public int POId { get; set; } // [POID] [int] IDENTITY(1,1) NOT NULL,
+    [Table("PODetails")]
+    public class PODetail
+    {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Column("POID")]
+        public Guid POId { get; set; }
 
-    [Column("POTypeID")] 
-    public int? POTypeId { get; set; } // [POTypeID] [int] NULL,
+        [Column("POTypeID")]
+        public int? POTypeId { get; set; }
 
-    [Column("PONumber")] 
-    public string? PONumber { get; set; } // [PONumber] [nvarchar](max) NULL,
+        [NotMapped]
+        public POType? Type
+        {
+            get => POTypeId.HasValue ? (POType)POTypeId.Value : null;
+            set => POTypeId = value.HasValue ? (int)value.Value : null;
+        }
 
-    [Column("POvalue", TypeName = "decimal(18,2)")] 
-    public decimal? POValue { get; set; } // [POvalue] [decimal](18, 2) NULL,
+        [Column("PONumber")]
+        public string? PONumber { get; set; }
 
-    [Column("POStatusID")] 
-    public int? POStatusId { get; set; } // [POStatusID] [int] NULL,
+        [Column("POvalue", TypeName = "decimal(18,2)")]
+        public decimal? POValue { get; set; }
 
-    [Column("ClientNameID")] 
-    public int? ClientNameId { get; set; } // [ClientNameID] [int] NULL,
+        [Column("POStatusID")]
+        public int? POStatusId { get; set; }
 
-    [Column("EngagementModelID")] 
-    public int? EngagementModelId { get; set; } // [EngagementModelID] [int] NULL,
+        [Column("ClientNameID")]
+        public Guid? ClientNameId { get; set; }
 
-    [Column("ResourceprojectName")]
-    public string? ResourceProjectName { get; set; } // [ResourceprojectName] [nvarchar](max) NULL,
+        [Column("EngagementModelID")]
+        public int? EngagementModelId { get; set; }
 
-    [Column("LocationID")] 
-    public int? LocationId { get; set; } // [LocationID] [int] NULL,
+        [Column("ResourceprojectName")]
+        public string? ResourceProjectName { get; set; }
 
-    [Column("Accountable")] 
-    public string? Accountable { get; set; } // [Accountable] [nvarchar](max) NULL,
+        [Column("LocationID")]
+        public int? LocationId { get; set; }
 
-    [Column("CurrencyID")] 
-    public int? CurrencyId { get; set; } // [CurrencyID] [int] NULL,
+        [Column("Accountable")]
+        public string? Accountable { get; set; }
 
-    [Column("JoiningDate")] 
-    public string? JoiningDate { get; set; } // [JoiningDate] [nvarchar](max) NULL,
+        [Column("CurrencyID")]
+        public int? CurrencyId { get; set; }
 
-    [Column("StartDate")] 
-    public string? StartDate { get; set; } // [StartDate] [nvarchar](max) NULL,
+        [Column("JoiningDate")]
+        public DateTime? JoiningDate { get; set; }
 
-    [Column("EndDate")]
-    public string? EndDate { get; set; } // [EndDate] [nvarchar](max) NULL,
+        [Column("StartDate")]
+        public DateTime? StartDate { get; set; }
 
-    [Column("ContractPeriod")] 
-    [MaxLength(200)]
-    public string? ContractPeriod { get; set; } // [ContractPeriod] [nvarchar](200) NULL,
+        [Column("EndDate")]
+        public DateTime? EndDate { get; set; }
 
-    [Column("RenewalDate")] 
-    public string? RenewalDate { get; set; } // [RenewalDate] [nvarchar](max) NULL,
+        [Column("ContractPeriod")]
+        [MaxLength(200)]
+        public string? ContractPeriod { get; set; }
 
-    [Column("RemindertoAlert")] 
-    public string? ReminderToAlert { get; set; } // [RemindertoAlert] [nvarchar](max) NULL,
+        [Column("RenewalDate")]
+        public DateTime? RenewalDate { get; set; }
 
-    [Column("Remarks")] 
-    public string? Remarks { get; set; } // [Remarks] [nvarchar](max) NULL,
+        [Column("RemindertoAlert")]
+        public string? ReminderToAlert { get; set; }
 
-    [Column("POFileName")] 
-    public string? POFileName { get; set; } // [POFileName] [nvarchar](max) NULL,
+        [Column("Remarks")]
+        public string? Remarks { get; set; }
 
-    [Column("Isactive")] 
-    public int? IsActive { get; set; } // [Isactive] [int] NULL,
+        [Column("POFileName")]
+        public string? POFileName { get; set; }
 
-    [Column("Suspend")] 
-    public int? Suspend { get; set; } // [Suspend] [int] NULL,
+        [Column("Isactive")]
+        public int? IsActive { get; set; }
 
-    [Column("Createddatetime")] 
-    public DateTime? CreatedDateTime { get; set; } // [Createddatetime] [datetime] NULL,
+        [Column("Suspend")]
+        public int? Suspend { get; set; }
 
-    [Column("CreatedBy")] 
-    public int? CreatedBy { get; set; } // [CreatedBy] [int] NULL,
+        [Column("Createddatetime")]
+        public DateTime? CreatedDateTime { get; set; }
 
-    [Column("Updateddatetime")] 
-    public DateTime? UpdatedDateTime { get; set; } // [Updateddatetime] [datetime] NULL,
+        [Column("CreatedBy")]
+        public int? CreatedBy { get; set; }
 
-    [Column("UpdatedBy")] 
-    public int? UpdatedBy { get; set; } // [UpdatedBy] [int] NULL,
+        [Column("Updateddatetime")]
+        public DateTime? UpdatedDateTime { get; set; }
 
-    [Column("DMPOC")] 
-    [MaxLength(255)]
-    public string? DMPOC { get; set; } // [DMPOC] [nvarchar](255) NULL,
+        [Column("UpdatedBy")]
+        public int? UpdatedBy { get; set; }
 
-    [Column("FMPOC")]
-    [MaxLength(255)]
-    public string? FMPOC { get; set; } // [FMPOC] [nvarchar](255) NULL,
+        [Column("DMPOC")]
+        [MaxLength(255)]
+        public string? DMPOC { get; set; }
 
-    [Column("ProposalPath")] 
-    [MaxLength(255)]
-    public string? ProposalPath { get; set; } // [ProposalPath] [nvarchar](255) NULL,
+        [Column("FMPOC")]
+        [MaxLength(255)]
+        public string? FMPOC { get; set; }
+
+        [Column("ProposalPath")]
+        [MaxLength(255)]
+        public string? ProposalPath { get; set; }
+
+        // Foreign Key Reference
+        [ForeignKey("ClientNameId")]
+        public virtual Client Client { get; set; }
+
+        [NotMapped] // This is not stored in the database
+        public string? ClientName { get; set; }
+    }
 }

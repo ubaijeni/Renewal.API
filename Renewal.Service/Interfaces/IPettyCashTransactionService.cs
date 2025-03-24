@@ -11,7 +11,7 @@ namespace Renewal.Services.Interfaces
     {
         Task<IEnumerable<PettyCashTransactionDTO>> GetAllTransactionsAsync(Guid? branchId, DateTime? startDate, DateTime? endDate);
         Task<PettyCashTransactionDTO> GetTransactionByIdAsync(Guid transactionId);
-        Task<PettyCashTransactionDTO> AddTransactionAsync(AddPettyCashTransactionDTO transactionDTO);
+        Task<PettyCashTransactionDTO> AddTransactionAsync(AddPettyCashTransactionDTO trasactionDTO);
         Task UpdateTransactionAsync(UpdatePettyCashTransactionDTO transactionDTO);
         Task DeleteTransactionAsync(Guid transactionId);
 
