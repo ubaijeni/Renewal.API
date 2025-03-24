@@ -53,36 +53,22 @@ namespace Renewal.Service.BusinessLogic
 
         public async Task<AmountReceiveDTO> CreateAsync(AddAmountReceiveDTO input)
         {
-            // 🔹 Step 1: Check if PO exists in PODetails
             var existingPO = await _data.GetPODetailByIdAsync(input.POId);
             if (existingPO == null)
             {
                 throw new Exception($"PO Number {input.POId} does not exist in PODetails.");
             }
-
-            // 🔹 Step 2: Ensure POValue is not null
             decimal poValue = existingPO.POValue ?? 0;
-
-            // 🔹 Step 3: Get the total received amount for this PO
             decimal totalAmountReceived = await _data.GetTotalAmountReceivedByPOIdAsync(input.POId);
-
-            // 🔹 Step 4: Calculate the Balance Amount
             decimal balanceAmount = poValue - totalAmountReceived - input.Amountreceived;
-
-            // 🔹 Step 5: Ensure balance amount is not negative
             if (balanceAmount < 0)
             {
                 throw new Exception($"Cannot receive {input.Amountreceived}. Exceeds PO Value. Remaining balance: {poValue - totalAmountReceived}");
             }
 
-            // 🔹 Step 6: Map DTO to AmountReceive Model
             var amount = _mapper.Map<AmountReceive>(input);
-            amount.PODetail = existingPO; // Set the PO relationship correctly
-
-            // 🔹 Step 7: Insert the new amount record
+            amount.PODetail = existingPO; 
             amount = await _data.CreateAsync(amount);
-
-            // 🔹 Step 8: Return DTO with updated Balance Amount
             var result = _mapper.Map<AmountReceiveDTO>(amount);
             result.BalanceAmount = balanceAmount;
 
