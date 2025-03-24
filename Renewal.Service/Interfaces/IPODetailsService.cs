@@ -9,13 +9,13 @@ namespace Renewal.Service.Interfaces
     {
         Task<List<PODetailsDto>> GetAllPODetailsAsync(
             bool includeDeleted = false,
-            int? clientId = null,
+            Guid? clientId = null,
             DateTime? startDate = null,
-            DateTime? endDate = null);
+            DateTime? endDate = null, string? clientName = null, int? PONumber = null);
 
-        Task<PODetailsDto> GetPODetailByIdAsync(int id);
+        Task<PODetailsDto> GetPODetailByIdAsync(Guid id);
         Task<PODetailsDto> CreatePODetailAsync(CreatePODetailsDto createPODetailsDto);
-        Task<PODetailsDto> UpdatePODetailAsync(int id, UpdatePODetailsDto updatePODetailsDto);
+        Task<PODetailsDto> UpdatePODetailAsync(Guid id, UpdatePODetailsDto updatePODetailsDto);
         Task<bool> DeletePODetailAsync(int id);
     }
 }

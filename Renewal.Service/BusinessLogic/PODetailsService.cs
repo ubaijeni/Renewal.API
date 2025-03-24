@@ -1,11 +1,10 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Renewal.DataHub.Repositories;
 using Renewal.Service.DTO;
 using Renewal.Service.Interfaces;
 using Renewal.Service.Mappings;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Renewal.Service.BusinessLogic
 {
@@ -19,20 +18,22 @@ namespace Renewal.Service.BusinessLogic
         }
 
         public async Task<List<PODetailsDto>> GetAllPODetailsAsync(
-            bool includeDeleted = false, 
-            int? clientId = null, 
-            DateTime? startDate = null, 
-            DateTime? endDate = null)
+            bool includeDeleted = false,
+            Guid? clientId = null,
+            DateTime? startDate = null,
+            DateTime? endDate = null,string? clientName = null, int? PONumber = null)
         {
+            // ✅ Call the repository method (avoid direct querying in service)
             var poDetails = await _poDetailsRepository.GetAllPODetailsAsync(
-                includeDeleted, clientId, startDate, endDate);
-            return poDetails.Select(PODetailsMapper.ToDto).ToList();
+                includeDeleted, clientId, startDate, endDate, clientName);
+
+            return poDetails.Select(PODetailsMapper.ToDto).ToList(); // ✅ Correct Mapping
         }
 
-        public async Task<PODetailsDto> GetPODetailByIdAsync(int id)
+        public async Task<PODetailsDto> GetPODetailByIdAsync(Guid id)
         {
             var poDetail = await _poDetailsRepository.GetPODetailByIdAsync(id);
-            return PODetailsMapper.ToDto(poDetail);
+            return poDetail != null ? PODetailsMapper.ToDto(poDetail) : null;
         }
 
         public async Task<PODetailsDto> CreatePODetailAsync(CreatePODetailsDto createPODetailsDto)
@@ -42,7 +43,7 @@ namespace Renewal.Service.BusinessLogic
             return PODetailsMapper.ToDto(createdPODetail);
         }
 
-        public async Task<PODetailsDto> UpdatePODetailAsync(int id, UpdatePODetailsDto updatePODetailsDto)
+        public async Task<PODetailsDto> UpdatePODetailAsync(Guid id, UpdatePODetailsDto updatePODetailsDto)
         {
             var existingPODetail = await _poDetailsRepository.GetPODetailByIdAsync(id);
             if (existingPODetail == null)
