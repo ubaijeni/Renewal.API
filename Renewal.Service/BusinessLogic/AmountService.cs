@@ -25,13 +25,30 @@ namespace Renewal.Service.BusinessLogic
         public async Task<List<AmountReceiveDTO>> GetAsync()
         {
             var receivedData = await _data.GetAsync();
-            return _mapper.Map<List<AmountReceiveDTO>>(receivedData);
+            var resultList = new List<AmountReceiveDTO>();
+
+            foreach (var amount in receivedData)
+            {
+                decimal totalReceived = await _data.GetTotalAmountReceivedByPOIdAsync(amount.POId);
+
+                var result = _mapper.Map<AmountReceiveDTO>(amount, opts =>
+                    opts.Items["TotalAmountReceived"] = totalReceived);
+
+                resultList.Add(result);
+            }
+
+            return resultList;
         }
 
         public async Task<AmountReceiveDTO> GetByIdAsync(Guid id)
         {
             var receivedData = await _data.GetByIdAsync(id);
-            return _mapper.Map<AmountReceiveDTO>(receivedData);
+            if (receivedData == null) return null;
+
+            decimal totalReceived = await _data.GetTotalAmountReceivedByPOIdAsync(receivedData.POId);
+
+            return _mapper.Map<AmountReceiveDTO>(receivedData, opts =>
+                opts.Items["TotalAmountReceived"] = totalReceived);
         }
 
         public async Task<AmountReceiveDTO> CreateAsync(AddAmountReceiveDTO input)
